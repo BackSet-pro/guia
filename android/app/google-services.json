@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "52820828484",
+    "project_id": "guia-entrenamiento",
+    "storage_bucket": "guia-entrenamiento.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52820828484:android:eb576424882bfa26ed7711",
+        "android_client_info": {
+          "package_name": "com.back.guia_entrenamiento"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52820828484-bjlpmgsi4malf2tcdfivklkcqhldsdut.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.back.guia_entrenamiento",
+            "certificate_hash": "011d6a16440e291747f27b7224726d3e2315f5f7"
+          }
+        },
+        {
+          "client_id": "52820828484-7kilhc5qth2bvi72a542ip4b46b15sd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpXl9wUo7UCDVOgvuKm8SCr1qgHqjSp-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52820828484-7kilhc5qth2bvi72a542ip4b46b15sd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
