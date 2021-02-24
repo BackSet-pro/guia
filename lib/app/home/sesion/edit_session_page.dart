@@ -100,8 +100,6 @@ class _EditSessionPageState extends State<EditSessionPage> {
         );
       } on NoSuchMethodError catch (a) {
         print(a.toString());
-      } on CastError catch (e) {
-        print('Cast Error: ${e.toString()}');
       } catch (e) {
         showExceptionAlertDialog(
           context,

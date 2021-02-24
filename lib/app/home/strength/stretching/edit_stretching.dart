@@ -8,7 +8,6 @@ import 'package:guia_entrenamiento/services/training_api.dart';
 import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditStretchingPage extends StatefulWidget {
@@ -103,8 +102,6 @@ class _EditStretchingPageState extends State<EditStretchingPage> {
           title: 'Operación fallida',
           exception: e,
         );
-      } on CastError catch (e) {
-        print(e.toString());
       } catch (e) {
         showExceptionAlertDialog(
           context,
@@ -181,20 +178,20 @@ class _EditStretchingPageState extends State<EditStretchingPage> {
             (_selectedFile != null)
                 ? Image.file(_selectedFile)
                 : FadeInImage(
-              image: NetworkImage(_image),
-              placeholder: AssetImage('assets/images/jar-loading.gif'),
-              height: 200.00,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+                    image: NetworkImage(_image),
+                    placeholder: AssetImage('assets/images/jar-loading.gif'),
+                    height: 200.00,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
           (_inProcess)
               ? Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height * 0.95,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height * 0.95,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )
               : Center()
         ],
       ),
@@ -231,7 +228,8 @@ class _EditStretchingPageState extends State<EditStretchingPage> {
   }
 
   uploadImageToFirebase() {
-    final String path = 'stretching/stretching_${DateTime.now().toString()}.jpg';
+    final String path =
+        'stretching/stretching_${DateTime.now().toString()}.jpg';
     final Reference postImageRef = FirebaseStorage.instance.ref().child(path);
     final UploadTask uploadTask = postImageRef.putFile(_selectedFile);
     uploadTask.whenComplete(() async {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:guia_entrenamiento/app/home/models/session.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.dart';
@@ -107,8 +106,6 @@ class _EditForKmPageState extends State<EditForKmPage> {
           title: 'Operación fallida',
           exception: e,
         );
-      } on CastError catch (e) {
-        print(e.toString());
       } catch (e) {
         showExceptionAlertDialog(
           context,

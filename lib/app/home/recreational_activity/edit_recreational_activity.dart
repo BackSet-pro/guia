@@ -106,8 +106,6 @@ class _EditRecreationalActivityPageState
           title: 'Operación fallida',
           exception: e,
         );
-      } on CastError catch (e) {
-        print(e.toString());
       } catch (e) {
         showExceptionAlertDialog(
           context,
@@ -184,20 +182,20 @@ class _EditRecreationalActivityPageState
             (_selectedFile != null)
                 ? Image.file(_selectedFile)
                 : FadeInImage(
-              image: NetworkImage(_image),
-              placeholder: AssetImage('assets/images/jar-loading.gif'),
-              height: 200.00,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+                    image: NetworkImage(_image),
+                    placeholder: AssetImage('assets/images/jar-loading.gif'),
+                    height: 200.00,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
           (_inProcess)
               ? Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height * 0.95,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height * 0.95,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )
               : Center()
         ],
       ),
@@ -234,7 +232,8 @@ class _EditRecreationalActivityPageState
   }
 
   uploadImageToFirebase() {
-    final String path = 'recreational_activity/recreational_activity_${DateTime.now().toString()}.jpg';
+    final String path =
+        'recreational_activity/recreational_activity_${DateTime.now().toString()}.jpg';
     final Reference postImageRef = FirebaseStorage.instance.ref().child(path);
     final UploadTask uploadTask = postImageRef.putFile(_selectedFile);
     uploadTask.whenComplete(() async {

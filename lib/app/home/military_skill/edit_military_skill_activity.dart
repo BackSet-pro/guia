@@ -103,8 +103,6 @@ class _EditMilitarySkillPageState extends State<EditMilitarySkillPage> {
           title: 'Operación fallida',
           exception: e,
         );
-      } on CastError catch (e) {
-        print(e.toString());
       } catch (e) {
         showExceptionAlertDialog(
           context,
@@ -231,7 +229,8 @@ class _EditMilitarySkillPageState extends State<EditMilitarySkillPage> {
   }
 
   uploadImageToFirebase() {
-    final String path = 'military_skill/military_skill_${DateTime.now().toString()}.jpg';
+    final String path =
+        'military_skill/military_skill_${DateTime.now().toString()}.jpg';
     final Reference postImageRef = FirebaseStorage.instance.ref().child(path);
     final UploadTask uploadTask = postImageRef.putFile(_selectedFile);
     uploadTask.whenComplete(() async {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guia_entrenamiento/app/home/brigade/brigade_page.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
+import 'package:guia_entrenamiento/app/home/strength/stretching/describe_stretching.dart';
 import 'package:guia_entrenamiento/app/home/strength/stretching/edit_stretching.dart';
-import 'package:guia_entrenamiento/app/home/strength/warm_up/warm_up_page.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
@@ -11,8 +10,6 @@ import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.da
 import 'package:guia_entrenamiento/services/auth.dart';
 import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
-
-import 'file:///C:/Users/crism/OneDrive/Escritorio/Proyects/guia_entrenamiento%20-%20copia/lib/app/home/strength/principal/personalized/personalized_page.dart';
 
 class StretchingPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
@@ -99,8 +96,10 @@ class StretchingPage extends StatelessWidget {
             direction: DismissDirection.endToStart,
             onDismissed: (direction) => _delete(context, training),
             child: Card(
-              child: FlatButton(
-                child: Column(
+              child: ListTile(
+                title: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       '${training.name}',
@@ -117,10 +116,33 @@ class StretchingPage extends StatelessWidget {
                             width: double.infinity,
                             fit: BoxFit.cover,
                           ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FlatButton(
+                            color: Colors.redAccent,
+                            onPressed: () => EditStretchingPage.show(context,
+                                training: training),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            )),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        FlatButton(
+                            color: Colors.redAccent,
+                            onPressed: () => DescribeStretchingPage.show(
+                                context,
+                                training: training),
+                            child: Icon(
+                              Icons.description,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
                   ],
                 ),
-                onPressed: () =>
-                    EditStretchingPage.show(context, training: training),
               ),
             ),
           ),
@@ -128,5 +150,4 @@ class StretchingPage extends StatelessWidget {
       },
     );
   }
-
 }

@@ -45,14 +45,6 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  Future<void> _signInAnonymously(BuildContext context) async {
-    try {
-      await manager.signInAnonymously();
-    } on Exception catch (e) {
-      _showSignInError(context, e);
-    }
-  }
-
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
       await manager.signInWithGoogle();
@@ -85,7 +77,6 @@ class SignInPage extends StatelessWidget {
         title: Text('Guía digital de AFM'),
         elevation: 2.0,
         backgroundColor: Colors.black,
-
       ),
       body: _buildContent(context),
       backgroundColor: Colors.grey[200],
