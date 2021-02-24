@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guia_entrenamiento/app/home/aerobic_activity/interval/stair/describe_stair.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
@@ -10,7 +11,6 @@ import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
 
 import 'edit_stair.dart';
-
 
 class StairPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
@@ -97,8 +97,10 @@ class StairPage extends StatelessWidget {
             direction: DismissDirection.endToStart,
             onDismissed: (direction) => _delete(context, training),
             child: Card(
-              child: FlatButton(
-                child: Column(
+              child: ListTile(
+                title: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       '${training.name}',
@@ -115,10 +117,32 @@ class StairPage extends StatelessWidget {
                             width: double.infinity,
                             fit: BoxFit.cover,
                           ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FlatButton(
+                            color: Colors.redAccent,
+                            onPressed: () =>
+                                EditStairPage.show(context, training: training),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            )),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        FlatButton(
+                            color: Colors.redAccent,
+                            onPressed: () => DescribeStairPage.show(context,
+                                training: training),
+                            child: Icon(
+                              Icons.description,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
                   ],
                 ),
-                onPressed: () =>
-                    EditStairPage.show(context, training: training),
               ),
             ),
           ),

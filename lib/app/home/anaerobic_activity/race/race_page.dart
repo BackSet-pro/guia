@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:guia_entrenamiento/app/home/anaerobic_activity/race/describe_race.dart';
 import 'package:guia_entrenamiento/app/home/anaerobic_activity/race/edit_race_page.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
-import 'package:guia_entrenamiento/app/home/models/session.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
-import 'package:guia_entrenamiento/common_widgets/Common_list_tile.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.dart';
@@ -97,8 +96,10 @@ class RacePage extends StatelessWidget {
             direction: DismissDirection.endToStart,
             onDismissed: (direction) => _delete(context, training),
             child: Card(
-              child: FlatButton(
-                child: Column(
+              child: ListTile(
+                title: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       '${training.name}',
@@ -115,9 +116,32 @@ class RacePage extends StatelessWidget {
                             width: double.infinity,
                             fit: BoxFit.cover,
                           ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FlatButton(
+                            color: Colors.redAccent,
+                            onPressed: () =>
+                                EditRacePage.show(context, training: training),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            )),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        FlatButton(
+                            color: Colors.redAccent,
+                            onPressed: () => DescribeRacePage.show(context,
+                                training: training),
+                            child: Icon(
+                              Icons.description,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
                   ],
                 ),
-                onPressed: () => EditRacePage.show(context, training: training),
               ),
             ),
           ),

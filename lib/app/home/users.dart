@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guia_entrenamiento/app/home/models/user.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
-import 'package:guia_entrenamiento/common_widgets/Common_list_tile.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.dart';
 import 'package:guia_entrenamiento/services/auth.dart';

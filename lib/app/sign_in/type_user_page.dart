@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:guia_entrenamiento/app/home/final_user/final_page.dart';
-import 'package:guia_entrenamiento/app/home/models/brigade.dart';
 import 'package:guia_entrenamiento/app/home/models/session.dart';
-import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/ultimate/home_page.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/services/auth.dart';
-import 'package:guia_entrenamiento/services/brigade_api.dart';
 import 'package:guia_entrenamiento/services/session_api.dart';
-import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
 
 class TypeUserPage extends StatefulWidget {
@@ -103,7 +99,8 @@ class _TypeUserPageState extends State<TypeUserPage> {
           Icons.navigate_next,
         ),
         backgroundColor: Colors.black87,
-        onPressed: () => _submit(),
+        onPressed:
+            (!isAdmin && _selectedSession == null) ? null : () => _submit(),
       ),
     );
   }

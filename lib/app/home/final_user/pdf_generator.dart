@@ -90,7 +90,7 @@ class PdfGenerator extends StatelessWidget {
     final pdf = pw.Document();
     final trainingApi = _.read<TrainingApi>();
     List<Training> trainings =
-        await trainingApi.trainingByIdSession(session.idsession).first;
+    await trainingApi.trainingByIdSession(session.idsession).first;
     // final pageTheme = await _myPageTheme(format);
     pdf.addPage(
       pw.MultiPage(
@@ -98,107 +98,107 @@ class PdfGenerator extends StatelessWidget {
           // pageTheme: pageTheme,
           // build: (pw.Context context) => getBody(trainings),
           build: (pw.Context context) => [
-                pw.ListView.builder(
-                    itemBuilder: (_, i) {
-                      return pw.Column(children: [
-                        // if (trainings[i].name != null)
-                        //   pw.Header(text: '${trainings[i].name}'),
-                        // // pw.Image()
-                        if (trainings[i].description != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Descripción:'),
-                            pw.Paragraph(text: '${trainings[i].description}'),
-                          ]),
-                        if (trainings[i].distance != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Distancia:'),
-                            pw.Text('${trainings[i].distance.toString()}'),
-                          ]),
-                        if (trainings[i].pausa != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Pausa:'),
-                            pw.Text('${trainings[i].pausa.toString()}'),
-                          ]),
-                        if (trainings[i].style != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Stilo:'),
-                            pw.Text('${trainings[i].style}'),
-                          ]),
-                        if (trainings[i].numberSeries != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Número de Series:'),
-                            pw.Text('${trainings[i].numberSeries.toString()}'),
-                          ]),
-                        if (trainings[i].repetitions != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Repeticiones:'),
-                            pw.Text('${trainings[i].repetitions.toString()}'),
-                          ]),
-                        if (trainings[i].intensity != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Intesisdad:'),
-                            pw.Text('${trainings[i].intensity.toString()}'),
-                          ]),
-                        if (trainings[i].time != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Tiempo:'),
-                            pw.Text('${trainings[i].time.toString()}'),
-                          ]),
-                        if (trainings[i].macroPause != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Macro Pausa:'),
-                            pw.Text('${trainings[i].macroPause.toString()}'),
-                          ]),
-                        if (trainings[i].microPause != null)
-                          pw.Column(children: [
-                            pw.Header(text: 'Micro Pausa:'),
-                            pw.Text('${trainings[i].microPause.toString()}'),
-                          ]),
-                      ]);
-                    },
-                    itemCount: trainings.length),
-              ]),
+            pw.ListView.builder(
+                itemBuilder: (_, i) {
+                  return pw.Column(children: [
+                    // if (trainings[i].name != null)
+                    //   pw.Header(text: '${trainings[i].name}'),
+                    // // pw.Image()
+                    if (trainings[i].description != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Descripción:'),
+                        pw.Paragraph(text: '${trainings[i].description}'),
+                      ]),
+                    if (trainings[i].distance != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Distancia:'),
+                        pw.Text('${trainings[i].distance.toString()}'),
+                      ]),
+                    if (trainings[i].pausa != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Pausa:'),
+                        pw.Text('${trainings[i].pausa.toString()}'),
+                      ]),
+                    if (trainings[i].style != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Stilo:'),
+                        pw.Text('${trainings[i].style}'),
+                      ]),
+                    if (trainings[i].numberSeries != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Número de Series:'),
+                        pw.Text('${trainings[i].numberSeries.toString()}'),
+                      ]),
+                    if (trainings[i].repetitions != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Repeticiones:'),
+                        pw.Text('${trainings[i].repetitions.toString()}'),
+                      ]),
+                    if (trainings[i].intensity != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Intesisdad:'),
+                        pw.Text('${trainings[i].intensity.toString()}'),
+                      ]),
+                    if (trainings[i].time != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Tiempo:'),
+                        pw.Text('${trainings[i].time.toString()}'),
+                      ]),
+                    if (trainings[i].macroPause != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Macro Pausa:'),
+                        pw.Text('${trainings[i].macroPause.toString()}'),
+                      ]),
+                    if (trainings[i].microPause != null)
+                      pw.Column(children: [
+                        pw.Header(text: 'Micro Pausa:'),
+                        pw.Text('${trainings[i].microPause.toString()}'),
+                      ]),
+                  ]);
+                },
+                itemCount: trainings.length),
+          ]),
     );
     return pdf.save();
   }
 
-  // Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
-  //   final bgShape =
-  //       await rootBundle.loadString('assets/images/fondo_militar.svg');
-  //
-  //   format = format.applyMargin(
-  //       left: 2.0 * PdfPageFormat.cm,
-  //       top: 4.0 * PdfPageFormat.cm,
-  //       right: 2.0 * PdfPageFormat.cm,
-  //       bottom: 2.0 * PdfPageFormat.cm);
-  //   return pw.PageTheme(
-  //     pageFormat: format,
-  //     theme: pw.ThemeData.withFont(
-  //       base: pw.Font.ttf(
-  //           await rootBundle.load('assets/open-sans/OpenSans-Regular.ttf')),
-  //       bold: pw.Font.ttf(
-  //           await rootBundle.load('assets/open-sans/OpenSans-Bold.ttf')),
-  //     ),
-  //     buildBackground: (pw.Context context) {
-  //       return pw.FullPage(
-  //         ignoreMargins: true,
-  //         child: pw.Stack(
-  //           children: [
-  //             pw.Positioned(
-  //               child: pw.SvgImage(svg: bgShape),
-  //               left: 0,
-  //               top: 0,
-  //             ),
-  //             pw.Positioned(
-  //               child: pw.Transform.rotate(
-  //                   angle: pi, child: pw.SvgImage(svg: bgShape)),
-  //               right: 0,
-  //               bottom: 0,
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+// Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
+//   final bgShape =
+//       await rootBundle.loadString('assets/images/fondo_militar.svg');
+//
+//   format = format.applyMargin(
+//       left: 2.0 * PdfPageFormat.cm,
+//       top: 4.0 * PdfPageFormat.cm,
+//       right: 2.0 * PdfPageFormat.cm,
+//       bottom: 2.0 * PdfPageFormat.cm);
+//   return pw.PageTheme(
+//     pageFormat: format,
+//     theme: pw.ThemeData.withFont(
+//       base: pw.Font.ttf(
+//           await rootBundle.load('assets/open-sans/OpenSans-Regular.ttf')),
+//       bold: pw.Font.ttf(
+//           await rootBundle.load('assets/open-sans/OpenSans-Bold.ttf')),
+//     ),
+//     buildBackground: (pw.Context context) {
+//       return pw.FullPage(
+//         ignoreMargins: true,
+//         child: pw.Stack(
+//           children: [
+//             pw.Positioned(
+//               child: pw.SvgImage(svg: bgShape),
+//               left: 0,
+//               top: 0,
+//             ),
+//             pw.Positioned(
+//               child: pw.Transform.rotate(
+//                   angle: pi, child: pw.SvgImage(svg: bgShape)),
+//               right: 0,
+//               bottom: 0,
+//             ),
+//           ],
+//         ),
+//       );
+//     },
+//   );
+// }
 }

@@ -11,8 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DescribeWarmUpPage extends StatefulWidget {
-  const DescribeWarmUpPage({Key key, this.training, this.trainingApi})
+class DescribeRecreationalActivityPage extends StatefulWidget {
+  const DescribeRecreationalActivityPage(
+      {Key key, this.training, this.trainingApi})
       : super(key: key);
   final Training training;
   final TrainingApi trainingApi;
@@ -21,7 +22,7 @@ class DescribeWarmUpPage extends StatefulWidget {
     final trainingApi = context.read<TrainingApi>();
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DescribeWarmUpPage(
+        builder: (context) => DescribeRecreationalActivityPage(
           trainingApi: trainingApi,
           training: training,
         ),
@@ -31,11 +32,14 @@ class DescribeWarmUpPage extends StatefulWidget {
   }
 
   @override
-  _DescribeWarmUpPageState createState() => _DescribeWarmUpPageState();
+  _DescribeRecreationalActivityPageState createState() =>
+      _DescribeRecreationalActivityPageState();
 }
 
-class _DescribeWarmUpPageState extends State<DescribeWarmUpPage> {
+class _DescribeRecreationalActivityPageState
+    extends State<DescribeRecreationalActivityPage> {
   bool select = false;
+
   Brigade _selectedBrigade;
   Session _selectedSession;
 
@@ -105,13 +109,16 @@ class _DescribeWarmUpPageState extends State<DescribeWarmUpPage> {
           height: 5.00,
         ),
         Text(
-          "Tiempo:",
+          "Repeticiones:",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 17,
           ),
         ),
-        Text(widget.training.time.toString()),
+        Text(widget.training.repetitions.toString()),
+        SizedBox(
+          height: 5.00,
+        ),
         SizedBox(
           height: 5.00,
         ),

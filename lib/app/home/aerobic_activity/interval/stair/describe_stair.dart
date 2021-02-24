@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DescribeWarmUpPage extends StatefulWidget {
-  const DescribeWarmUpPage({Key key, this.training, this.trainingApi})
+class DescribeStairPage extends StatefulWidget {
+  const DescribeStairPage({Key key, this.training, this.trainingApi})
       : super(key: key);
   final Training training;
   final TrainingApi trainingApi;
@@ -21,7 +21,7 @@ class DescribeWarmUpPage extends StatefulWidget {
     final trainingApi = context.read<TrainingApi>();
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DescribeWarmUpPage(
+        builder: (context) => DescribeStairPage(
           trainingApi: trainingApi,
           training: training,
         ),
@@ -31,11 +31,12 @@ class DescribeWarmUpPage extends StatefulWidget {
   }
 
   @override
-  _DescribeWarmUpPageState createState() => _DescribeWarmUpPageState();
+  _DescribeStairPageState createState() => _DescribeStairPageState();
 }
 
-class _DescribeWarmUpPageState extends State<DescribeWarmUpPage> {
+class _DescribeStairPageState extends State<DescribeStairPage> {
   bool select = false;
+
   Brigade _selectedBrigade;
   Session _selectedSession;
 
@@ -112,6 +113,41 @@ class _DescribeWarmUpPageState extends State<DescribeWarmUpPage> {
           ),
         ),
         Text(widget.training.time.toString()),
+        Text(
+          "Distancia:",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(widget.training.distance.toString()),
+        Text(
+          "Intensidad:",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(widget.training.intensity.toString()),
+        Text(
+          "Pausa:",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(widget.training.pausa.toString()),
+        Text(
+          "Número de series:",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(widget.training.numberSeries.toString()),
+        SizedBox(
+          height: 5.00,
+        ),
         SizedBox(
           height: 5.00,
         ),

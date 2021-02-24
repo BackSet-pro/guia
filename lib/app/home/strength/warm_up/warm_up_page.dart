@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:guia_entrenamiento/app/home/brigade/brigade_page.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
-import 'file:///C:/Users/crism/OneDrive/Escritorio/Proyects/guia_entrenamiento%20-%20copia/lib/app/home/strength/principal/personalized/personalized_page.dart';
-import 'package:guia_entrenamiento/app/home/strength/stretching/stretching_page.dart';
 import 'package:guia_entrenamiento/app/home/strength/warm_up/describe_warm_up_page.dart';
 import 'package:guia_entrenamiento/app/home/strength/warm_up/edit_warm_up_page.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
-import 'package:guia_entrenamiento/common_widgets/Common_list_tile.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.dart';

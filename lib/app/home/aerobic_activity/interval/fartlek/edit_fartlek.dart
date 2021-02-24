@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:guia_entrenamiento/app/home/models/session.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.dart';
@@ -70,8 +69,6 @@ class _EditFartlekPageState extends State<EditFartlekPage> {
 
   Future<void> _submit() async {
     if (_validateAndSaveForm()) {
-      final session = context.read<Session>();
-
       try {
         final brigades = await widget.trainingApi.forKmStream().first;
         final allNames = brigades.map((brigade) => brigade.name).toList();
@@ -109,8 +106,6 @@ class _EditFartlekPageState extends State<EditFartlekPage> {
           title: 'Operación fallida',
           exception: e,
         );
-      } on CastError catch (e) {
-        print(e.toString());
       } catch (e) {
         showExceptionAlertDialog(
           context,

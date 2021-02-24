@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:guia_entrenamiento/app/home/final_user/pdf_generator.dart';
 import 'package:guia_entrenamiento/app/home/models/session.dart';
@@ -9,15 +7,11 @@ import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/services/auth.dart';
 import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
 
 class FinalPage extends StatelessWidget {
   FinalPage({Key key, this.trainingApi, this.session}) : super(key: key);
   final Session session;
   final TrainingApi trainingApi;
-  final pdf = pw.Document();
 
   static Future<void> show(BuildContext context, {Session session}) async {
     final trainingApi = context.read<TrainingApi>();
@@ -294,84 +288,5 @@ class FinalPage extends StatelessWidget {
         }
       },
     );
-  }
-
-  writeOnPdf(List<Training> trainings) {
-    pdf.addPage(
-      pw.MultiPage(
-        pageFormat: PdfPageFormat.a4,
-        margin: pw.EdgeInsets.all(32),
-        build: (pw.Context context) {
-          return [
-            pw.ListView.builder(
-                itemBuilder: (_, i) {
-                  return pw.Column(children: [
-                    pw.Header(
-                      title: trainings[i].name,
-                    ),
-                    // pw.Image()
-                    pw.Column(children: [
-                      pw.Header(title: 'Descripción: '),
-                      pw.Paragraph(text: trainings[i].description),
-                    ]),
-                    if (trainings[i].distance != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Distancia: '),
-                        pw.Text(trainings[i].distance.toString()),
-                      ]),
-                    if (trainings[i].pausa != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Pausa: '),
-                        pw.Text(trainings[i].pausa.toString()),
-                      ]),
-                    if (trainings[i].style != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Stilo: '),
-                        pw.Text(trainings[i].style),
-                      ]),
-                    if (trainings[i].numberSeries != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Número de Series: '),
-                        pw.Text(trainings[i].numberSeries.toString()),
-                      ]),
-                    if (trainings[i].repetitions != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Repeticiones: '),
-                        pw.Text(trainings[i].repetitions.toString()),
-                      ]),
-                    if (trainings[i].intensity != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Intesisdad: '),
-                        pw.Text(trainings[i].intensity.toString()),
-                      ]),
-                    if (trainings[i].time != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Tiempo: '),
-                        pw.Text(trainings[i].time.toString()),
-                      ]),
-                    if (trainings[i].macroPause != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Macro Pausa: '),
-                        pw.Text(trainings[i].macroPause.toString()),
-                      ]),
-                    if (trainings[i].microPause != null)
-                      pw.Column(children: [
-                        pw.Header(title: 'Micro Pausa: '),
-                        pw.Text(trainings[i].microPause.toString()),
-                      ]),
-                  ]);
-                },
-                itemCount: trainings.length),
-          ];
-        },
-      ),
-    );
-  }
-
-  Future savePdf() async {
-    Directory documentDirectory = await getApplicationDocumentsDirectory();
-    String documentPath = documentDirectory.path;
-    File file = File("$documentPath/example.pdf");
-    file.writeAsBytesSync(pdf.save());
   }
 }

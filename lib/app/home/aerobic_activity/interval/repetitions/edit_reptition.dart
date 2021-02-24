@@ -111,8 +111,6 @@ class _EditRepetitionPageState extends State<EditRepetitionPage> {
           title: 'Operación fallida',
           exception: e,
         );
-      } on CastError catch (e) {
-        print(e.toString());
       } catch (e) {
         showExceptionAlertDialog(
           context,

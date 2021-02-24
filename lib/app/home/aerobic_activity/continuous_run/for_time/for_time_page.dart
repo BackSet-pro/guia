@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guia_entrenamiento/app/home/aerobic_activity/continuous_run/for_time/describe_for_time.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
@@ -87,7 +88,7 @@ class ForTimePage extends StatelessWidget {
   Widget _buildContents(BuildContext bodyContext) {
     final trainingApi = bodyContext.watch<TrainingApi>();
     return StreamBuilder<List<Training>>(
-      stream: trainingApi.forKmStream(),
+      stream: trainingApi.forTimeStream(),
       builder: (context, snapshot) {
         return ListItemsBuilder<Training>(
           snapshot: snapshot,
@@ -97,8 +98,10 @@ class ForTimePage extends StatelessWidget {
             direction: DismissDirection.endToStart,
             onDismissed: (direction) => _delete(context, training),
             child: Card(
-              child: FlatButton(
-                child: Column(
+              child: ListTile(
+                title: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       '${training.name}',
@@ -115,10 +118,32 @@ class ForTimePage extends StatelessWidget {
                             width: double.infinity,
                             fit: BoxFit.cover,
                           ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FlatButton(
+                            color: Colors.redAccent,
+                            onPressed: () => EditForTimePage.show(context,
+                                training: training),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            )),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        FlatButton(
+                            color: Colors.redAccent,
+                            onPressed: () => DescribeForTimePage.show(context,
+                                training: training),
+                            child: Icon(
+                              Icons.description,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
                   ],
                 ),
-                onPressed: () =>
-                    EditForTimePage.show(context, training: training),
               ),
             ),
           ),
