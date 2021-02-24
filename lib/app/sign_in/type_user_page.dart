@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:guia_entrenamiento/app/home/final_user/final_page.dart';
+import 'package:guia_entrenamiento/app/home/models/brigade.dart';
+import 'package:guia_entrenamiento/app/home/models/session.dart';
+import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/ultimate/home_page.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/services/auth.dart';
+import 'package:guia_entrenamiento/services/brigade_api.dart';
+import 'package:guia_entrenamiento/services/session_api.dart';
+import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
 
 class TypeUserPage extends StatefulWidget {
@@ -66,18 +72,9 @@ class _TypeUserPageState extends State<TypeUserPage> {
         }
       }
     } else {
-      // final auth = Provider.of<AuthBase>(context, listen: false);
-      // final userApi = Provider.of<UserApi>(context, listen: false);
-      // // userApi.
-      // final userAux=
-      // if(){
-      //
-      // }
-
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => FinalPage(),
-        ),
+      FinalPage.show(
+        context,
+        session: _selectedSession,
       );
     }
   }
@@ -111,8 +108,11 @@ class _TypeUserPageState extends State<TypeUserPage> {
     );
   }
 
+  Session _selectedSession;
+
   Widget _buildContents() {
     final auth = Provider.of<AuthBase>(context, listen: false);
+    final sessionApi = context.read<SessionApi>();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -143,17 +143,51 @@ class _TypeUserPageState extends State<TypeUserPage> {
               onChanged: (value) => setState(() => isAdmin = value),
             ),
             (isAdmin)
-                ? Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: _buildForm(),
+                ? Center(
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: _buildForm(),
+                      ),
                     ),
                   )
-                : Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: _buildForm(),
-                    ),
+                : StreamBuilder<List<Session>>(
+                    key: UniqueKey(),
+                    stream: sessionApi.sessionStream(),
+                    builder: (_, snapshot) {
+                      if (snapshot.hasData) {
+                        return Center(
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: DropdownButton(
+                                key: UniqueKey(),
+                                disabledHint:
+                                    Text('Primero seleccione una brigrada'),
+                                hint: Text('Seleccione una sección'),
+                                value: _selectedSession,
+                                onChanged: (newSession) {
+                                  setState(() {
+                                    _selectedSession = newSession;
+                                  });
+                                },
+                                items: snapshot.data.map(
+                                  (session) {
+                                    return DropdownMenuItem(
+                                      key: UniqueKey(),
+                                      value: session,
+                                      child: Text(session.name),
+                                    );
+                                  },
+                                ).toList(),
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
                   ),
           ],
         ),
@@ -177,10 +211,10 @@ class _TypeUserPageState extends State<TypeUserPage> {
     return [
       TextFormField(
         decoration: InputDecoration(labelText: (isAdmin) ? text2 : text1),
-        obscureText: true,
+        obscureText: (isAdmin) ? true : false,
         initialValue: _password,
         validator: (value) =>
-            value.isNotEmpty ? null : 'la contraseña no puede estar vacía',
+            value.isNotEmpty ? null : 'el campo no puede estar vacío',
         onSaved: (value) => _password = value,
         onEditingComplete: _submit,
         // textInputAction: TextInputAction.,

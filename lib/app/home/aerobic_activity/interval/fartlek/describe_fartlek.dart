@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DescribeForKmPage extends StatefulWidget {
-  const DescribeForKmPage({Key key, this.training, this.trainingApi})
+class DescribeFartlekPage extends StatefulWidget {
+  const DescribeFartlekPage({Key key, this.training, this.trainingApi})
       : super(key: key);
   final Training training;
   final TrainingApi trainingApi;
@@ -21,7 +21,7 @@ class DescribeForKmPage extends StatefulWidget {
     final trainingApi = context.read<TrainingApi>();
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DescribeForKmPage(
+        builder: (context) => DescribeFartlekPage(
           trainingApi: trainingApi,
           training: training,
         ),
@@ -31,10 +31,10 @@ class DescribeForKmPage extends StatefulWidget {
   }
 
   @override
-  _DescribeForKmPageState createState() => _DescribeForKmPageState();
+  _DescribeFartlekPageState createState() => _DescribeFartlekPageState();
 }
 
-class _DescribeForKmPageState extends State<DescribeForKmPage> {
+class _DescribeFartlekPageState extends State<DescribeFartlekPage> {
   bool select = false;
 
   Brigade _selectedBrigade;

@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DescribeForKmPage extends StatefulWidget {
-  const DescribeForKmPage({Key key, this.training, this.trainingApi})
+class DescribePersonalizedPage extends StatefulWidget {
+  const DescribePersonalizedPage({Key key, this.training, this.trainingApi})
       : super(key: key);
   final Training training;
   final TrainingApi trainingApi;
@@ -21,7 +21,7 @@ class DescribeForKmPage extends StatefulWidget {
     final trainingApi = context.read<TrainingApi>();
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DescribeForKmPage(
+        builder: (context) => DescribePersonalizedPage(
           trainingApi: trainingApi,
           training: training,
         ),
@@ -31,10 +31,11 @@ class DescribeForKmPage extends StatefulWidget {
   }
 
   @override
-  _DescribeForKmPageState createState() => _DescribeForKmPageState();
+  _DescribePersonalizedPageState createState() =>
+      _DescribePersonalizedPageState();
 }
 
-class _DescribeForKmPageState extends State<DescribeForKmPage> {
+class _DescribePersonalizedPageState extends State<DescribePersonalizedPage> {
   bool select = false;
 
   Brigade _selectedBrigade;
@@ -106,29 +107,37 @@ class _DescribeForKmPageState extends State<DescribeForKmPage> {
           height: 5.00,
         ),
         Text(
-          "Tiempo:",
+          "Repeticiones:",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 17,
           ),
         ),
-        Text(widget.training.time.toString()),
+        Text(widget.training.repetitions.toString()),
         Text(
-          "Distancia:",
+          "Número de series:",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 17,
           ),
         ),
-        Text(widget.training.distance.toString()),
+        Text(widget.training.numberSeries.toString()),
         Text(
-          "Intensidad:",
+          "Micro Pausa:",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 17,
           ),
         ),
-        Text(widget.training.intensity.toString()),
+        Text(widget.training.microPause.toString()),
+        Text(
+          "Macro Pausa:",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(widget.training.macroPause.toString()),
         SizedBox(
           height: 5.00,
         ),

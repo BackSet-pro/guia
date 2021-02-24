@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DescribeForKmPage extends StatefulWidget {
-  const DescribeForKmPage({Key key, this.training, this.trainingApi})
+class DescribeRepetitionPage extends StatefulWidget {
+  const DescribeRepetitionPage({Key key, this.training, this.trainingApi})
       : super(key: key);
   final Training training;
   final TrainingApi trainingApi;
@@ -21,7 +21,7 @@ class DescribeForKmPage extends StatefulWidget {
     final trainingApi = context.read<TrainingApi>();
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DescribeForKmPage(
+        builder: (context) => DescribeRepetitionPage(
           trainingApi: trainingApi,
           training: training,
         ),
@@ -31,10 +31,10 @@ class DescribeForKmPage extends StatefulWidget {
   }
 
   @override
-  _DescribeForKmPageState createState() => _DescribeForKmPageState();
+  _DescribeRepetitionPageState createState() => _DescribeRepetitionPageState();
 }
 
-class _DescribeForKmPageState extends State<DescribeForKmPage> {
+class _DescribeRepetitionPageState extends State<DescribeRepetitionPage> {
   bool select = false;
 
   Brigade _selectedBrigade;
@@ -129,6 +129,22 @@ class _DescribeForKmPageState extends State<DescribeForKmPage> {
           ),
         ),
         Text(widget.training.intensity.toString()),
+        Text(
+          "Pausa:",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(widget.training.pausa.toString()),
+        Text(
+          "Número de series:",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+        Text(widget.training.numberSeries.toString()),
         SizedBox(
           height: 5.00,
         ),
