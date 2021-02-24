@@ -18,14 +18,20 @@ class SessionApi with ChangeNotifier {
     notifyListeners();
   }
 
-  // Stream<List<Session>> sessionStream() async* {
-  //   final http.Response response = await http.get(APIPath.source('session'));
-  //   yield ListSessions.fromRawJson(response.body).sessions;
-  // }
+  Stream<List<Session>> sessionStream() async* {
+    final http.Response response = await http.get(APIPath.source('session'));
+    yield ListSessions.fromRawJson(response.body).sessions;
+  }
 
   Stream<List<Session>> sessionsByIdBrigade(int id) async* {
     final http.Response response =
         await http.get(APIPath.source('query/session_by_id_brigade/+$id'));
     yield ListSessions.fromRawJson(response.body).sessions;
+  }
+
+  Stream<Session> sessionsByIdCodeSession(String code) async* {
+    final http.Response response =
+        await http.get(APIPath.source('query/session_by_code_session/+$code'));
+    yield Session.fromRawJson(response.body);
   }
 }

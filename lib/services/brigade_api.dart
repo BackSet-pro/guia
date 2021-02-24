@@ -23,4 +23,11 @@ class BrigadeApi with ChangeNotifier {
     yield ListBrigades.fromRawJson(response.body).brigades;
     notifyListeners();
   }
+
+  Stream<Brigade> brigadeByIdSessionStream(int id) async* {
+    final http.Response response =
+        await http.get(APIPath.source('brigade_by_id_session/$id'));
+    yield Brigade.fromRawJson(response.body);
+    notifyListeners();
+  }
 }
