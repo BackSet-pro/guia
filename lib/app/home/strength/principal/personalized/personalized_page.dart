@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
-import 'package:guia_entrenamiento/app/home/strength/principal/personalized/describe_personalized.dart';
-import 'package:guia_entrenamiento/app/home/strength/principal/personalized/edit_personalized.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
@@ -10,6 +9,8 @@ import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.da
 import 'package:guia_entrenamiento/services/auth.dart';
 import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
+
+import '../../../edit_training.dart';
 
 class PersonalizedPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
@@ -78,7 +79,8 @@ class PersonalizedPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditPersonalizedPage.show(context),
+        onPressed: () => EditTrainingPage.show(context,
+            title: 'Personalizado', type: 'personalized'),
       ),
     );
   }
@@ -121,8 +123,10 @@ class PersonalizedPage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => EditPersonalizedPage.show(context,
-                                training: training),
+                            onPressed: () => EditTrainingPage.show(context,
+                                training: training,
+                                title: 'Personalizado',
+                                type: 'personalized'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -132,8 +136,7 @@ class PersonalizedPage extends StatelessWidget {
                         ),
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => DescribePersonalizedPage.show(
-                                context,
+                            onPressed: () => DescribeTrainings.show(context,
                                 training: training),
                             child: Icon(
                               Icons.description,

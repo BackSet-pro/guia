@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/edit_training.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
-import 'package:guia_entrenamiento/app/home/strength/warm_up/describe_warm_up_page.dart';
-import 'package:guia_entrenamiento/app/home/strength/warm_up/edit_warm_up_page.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
@@ -78,7 +78,8 @@ class WarmUpPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditWarmUpPage.show(context),
+        onPressed: () => EditTrainingPage.show(context,
+            title: 'Calentamiento', type: 'warm_up'),
         backgroundColor: Colors.black,
       ),
     );
@@ -122,8 +123,10 @@ class WarmUpPage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => EditWarmUpPage.show(context,
-                                training: training),
+                            onPressed: () =>EditTrainingPage.show(context,
+                                training: training,
+                                title: 'Calentamiento',
+                                type: 'warm_up'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -133,7 +136,7 @@ class WarmUpPage extends StatelessWidget {
                         ),
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => DescribeWarmUpPage.show(context,
+                            onPressed: () => DescribeTrainings.show(context,
                                 training: training),
                             child: Icon(
                               Icons.description,

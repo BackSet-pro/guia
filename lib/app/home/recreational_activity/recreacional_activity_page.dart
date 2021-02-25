@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
+import 'package:guia_entrenamiento/app/home/edit_training.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
-import 'package:guia_entrenamiento/app/home/recreational_activity/describe_recreational_activity.dart';
-import 'package:guia_entrenamiento/app/home/recreational_activity/edit_recreational_activity.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
@@ -78,7 +78,8 @@ class RecreationalActivityPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditRecreationalActivityPage.show(context),
+        onPressed: () => EditTrainingPage.show(context,
+            title: 'Actividad Recreacional', type: 'recreational_activity'),
       ),
     );
   }
@@ -121,9 +122,10 @@ class RecreationalActivityPage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => EditRecreationalActivityPage.show(
-                                context,
-                                training: training),
+                            onPressed: () => EditTrainingPage.show(context,
+                                training: training,
+                                title: 'Actividad Recreacional',
+                                type: 'recreational_activity'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -134,7 +136,7 @@ class RecreationalActivityPage extends StatelessWidget {
                         FlatButton(
                             color: Colors.redAccent,
                             onPressed: () =>
-                                DescribeRecreationalActivityPage.show(context,
+                                DescribeTrainings.show(context,
                                     training: training),
                             child: Icon(
                               Icons.description,

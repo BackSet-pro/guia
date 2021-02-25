@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:guia_entrenamiento/app/home/models/brigade.dart';
 import 'package:guia_entrenamiento/app/home/models/session.dart';
+import 'package:guia_entrenamiento/common_widgets/input_text_common.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
 import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.dart';
 import 'package:guia_entrenamiento/services/session_api.dart';
@@ -33,18 +35,22 @@ class _EditSessionPageState extends State<EditSessionPage> {
   final _formKey = GlobalKey<FormState>();
 
   String _name;
-  String _sessionCode;
-  DateTime _date;
+  String _macroPause;
+  String _numberSeries;
+  String _microPause;
+  String _date;
 
-  TextEditingController _inputFieldDateController = new TextEditingController();
+  // TextEditingController _inputFieldDateController = new TextEditingController();
 
   @override
   void initState() {
     super.initState();
     if (widget.session != null) {
       _name = widget.session.name;
-      _sessionCode = widget.session.sessionCode;
-      _inputFieldDateController.text = widget.session.date.toIso8601String();
+      _date = widget.session.date;
+      _macroPause = widget.session.macroPause.toString();
+      _microPause = widget.session.microPause.toString();
+      _numberSeries = widget.session.numberSeries.toString();
     }
   }
 
@@ -79,8 +85,10 @@ class _EditSessionPageState extends State<EditSessionPage> {
         } else {
           final Session session = new Session().copyWith(
             name: _name,
-            sessionCode: _sessionCode,
             date: _date,
+            numberSeries: int.parse(_numberSeries),
+            macroPause: int.parse(_macroPause),
+            microPause: int.parse(_microPause),
             brigadeIdbrigade: brigadeProvider.idbrigade,
           );
           if (widget.session == null) {
@@ -169,58 +177,57 @@ class _EditSessionPageState extends State<EditSessionPage> {
         textInputAction: TextInputAction.next,
       ),
       TextFormField(
-        decoration: InputDecoration(labelText: 'Codigo de la sesión'),
-        initialValue: _sessionCode,
+        decoration: InputDecoration(labelText: 'Número de serie'),
+        initialValue: _numberSeries,
         validator: (value) =>
             value.isNotEmpty ? null : 'El campo no puede estar vacío',
-        onSaved: (value) => _sessionCode = value,
+        onSaved: (value) => _numberSeries = value,
         onEditingComplete: () => _submit(),
         textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.number,
+      ),
+      InputTextCommon(
+        child: TextFormField(
+          decoration: InputDecoration(labelText: 'Macro Pausa'),
+          initialValue: _macroPause,
+          validator: (value) =>
+              value.isNotEmpty ? null : 'El campo no puede estar vacío',
+          onSaved: (value) => _macroPause = value,
+          onEditingComplete: () => _submit(),
+          textInputAction: TextInputAction.next,
+          keyboardType: TextInputType.number,
+        ),
+        unit: 'minutos',
+      ),
+      InputTextCommon(
+        unit: 'minutos',
+        child: TextFormField(
+          decoration: InputDecoration(labelText: 'Micro Pausa'),
+          initialValue: _microPause,
+          validator: (value) =>
+              value.isNotEmpty ? null : 'El campo no puede estar vacío',
+          onSaved: (value) => _microPause = value,
+          onEditingComplete: () => _submit(),
+          textInputAction: TextInputAction.next,
+          keyboardType: TextInputType.number,
+        ),
+      ),
+      InputTextCommon(
+        child: TextFormField(
+          decoration: InputDecoration(labelText: 'Fecha'),
+          initialValue: _date,
+          validator: (value) =>
+              value.isNotEmpty ? null : 'El campo no puede estar vacío',
+          onSaved: (value) => _date = value,
+          onEditingComplete: () => _submit(),
+          keyboardType: TextInputType.phone,
+        ),
+        unit: 'YY-MM-DD',
       ),
       SizedBox(
         height: 15,
       ),
-      _buildDate(context),
+      // _buildDate(context),
     ];
-  }
-
-  Widget _buildDate(BuildContext context) {
-    return TextField(
-      enableInteractiveSelection: false,
-      controller: _inputFieldDateController,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        hintText: 'Fecha',
-        labelText: widget.session == null
-            ? 'Fecha'
-            : widget.session.date.toIso8601String(),
-        helperText: 'Ingrese la fecha',
-        suffixIcon: Icon(Icons.lock_open),
-        icon: Icon(Icons.calendar_today),
-      ),
-      onTap: () {
-        FocusScope.of(context).requestFocus(new FocusNode());
-        _selectDate(context);
-      },
-    );
-  }
-
-  _selectDate(BuildContext context) async {
-    DateTime picked = await showDatePicker(
-      context: context,
-      initialDate:
-          widget.session == null ? DateTime.now() : widget.session.date,
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2025),
-      locale: Locale('es', 'ES'),
-    );
-    if (picked != null) {
-      setState(() {
-        _date = picked;
-        _inputFieldDateController.text = _date.toIso8601String();
-      });
-    }
   }
 }

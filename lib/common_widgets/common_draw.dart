@@ -35,7 +35,7 @@ class CommonDraw extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              'Brigade'.toUpperCase(),
+              'brigada'.toUpperCase(),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.00),
             ),
             onTap: () {

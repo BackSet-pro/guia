@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guia_entrenamiento/app/home/aerobic_activity/interval/repetitions/describe_repetitions.dart';
-import 'package:guia_entrenamiento/app/home/aerobic_activity/interval/repetitions/edit_reptition.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
+import 'package:guia_entrenamiento/app/home/edit_training.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
@@ -78,7 +78,8 @@ class RepetitionsPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditRepetitionPage.show(context),
+        onPressed: () => EditTrainingPage.show(context,
+            title: 'Repeticiones', type: 'repetition'),
       ),
     );
   }
@@ -121,8 +122,10 @@ class RepetitionsPage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => EditRepetitionPage.show(context,
-                                training: training),
+                            onPressed: () => EditTrainingPage.show(context,
+                                training: training,
+                                title: 'Repeticiones',
+                                type: 'repetition'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -132,8 +135,7 @@ class RepetitionsPage extends StatelessWidget {
                         ),
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => DescribeRepetitionPage.show(
-                                context,
+                            onPressed: () => DescribeTrainings.show(context,
                                 training: training),
                             child: Icon(
                               Icons.description,

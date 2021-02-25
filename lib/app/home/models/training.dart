@@ -47,12 +47,10 @@ class Training {
     this.description,
     this.distance,
     this.pausa,
-    this.numberSeries,
     this.repetitions,
     this.intensity,
     this.time,
-    this.macroPause,
-    this.microPause,
+    this.numberSeries,
   });
 
   final int idtraining;
@@ -63,12 +61,10 @@ class Training {
   final String description;
   final int distance;
   final int pausa;
-  final int numberSeries;
   final int repetitions;
   final int intensity;
   final int time;
-  final int macroPause;
-  final int microPause;
+  final dynamic numberSeries;
 
   Training copyWith({
     int idtraining,
@@ -79,12 +75,10 @@ class Training {
     String description,
     int distance,
     int pausa,
-    int numberSeries,
     int repetitions,
     int intensity,
     int time,
-    int macroPause,
-    int microPause,
+    dynamic numberSeries,
   }) =>
       Training(
         idtraining: idtraining ?? this.idtraining,
@@ -95,15 +89,11 @@ class Training {
         description: description ?? this.description,
         distance: distance ?? this.distance,
         pausa: pausa ?? this.pausa,
-        numberSeries: numberSeries ?? this.numberSeries,
         repetitions: repetitions ?? this.repetitions,
         intensity: intensity ?? this.intensity,
         time: time ?? this.time,
-        macroPause: macroPause ?? this.macroPause,
-        microPause: microPause ?? this.microPause,
+        numberSeries: numberSeries ?? this.numberSeries,
       );
-
-
 
   factory Training.fromRawJson(String str) =>
       Training.fromJson(json.decode(str));
@@ -115,17 +105,15 @@ class Training {
         type: json["type"],
         image: json["image"],
         name: json["name"],
+        description: json["description"],
         style: json["style"] == null ? null : json["style"],
-        description: json["description"] == null ? null : json["description"],
         distance: json["distance"] == null ? null : json["distance"],
         pausa: json["pausa"] == null ? null : json["pausa"],
-        numberSeries:
-            json["number_series"] == null ? null : json["number_series"],
         repetitions: json["repetitions"] == null ? null : json["repetitions"],
         intensity: json["intensity"] == null ? null : json["intensity"],
         time: json["time"] == null ? null : json["time"],
-        macroPause: json["macro_pause"] == null ? null : json["macro_pause"],
-        microPause: json["micro_pause"] == null ? null : json["micro_pause"],
+        numberSeries:
+            json["number_series"] == null ? null : json["number_series"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -133,14 +121,13 @@ class Training {
         "image": image,
         "name": name,
         "description": description,
-        if (style != null) "style": style,
-        if (distance != null) "distance": distance.toString(),
-        if (pausa != null) "pausa": pausa.toString(),
-        if (numberSeries != null) "number_series": numberSeries.toString(),
-        if (repetitions != null) "repetitions": repetitions.toString(),
-        if (intensity != null) "intensity": intensity.toString(),
-        if (time != null) "time": time.toString(),
-        if (macroPause != null) "macro_pause": macroPause.toString(),
-        if (microPause != null) "micro_pause": microPause.toString(),
+        "style": style == null ? null : style.toString(),
+        "distance": distance == null ? null : distance.toString(),
+        "pausa": pausa == null ? null : pausa.toString(),
+        "repetitions": repetitions == null ? null : repetitions.toString(),
+        "intensity": intensity == null ? null : intensity.toString(),
+        "time": time == null ? null : time.toString(),
+        "number_series": numberSeries == null ? null : numberSeries.toString(),
       };
+
 }

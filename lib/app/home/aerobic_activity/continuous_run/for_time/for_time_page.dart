@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guia_entrenamiento/app/home/aerobic_activity/continuous_run/for_time/describe_for_time.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/edit_training.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
@@ -10,7 +11,7 @@ import 'package:guia_entrenamiento/services/auth.dart';
 import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
 
-import 'edit_for_time.dart';
+import 'package:guia_entrenamiento/app/home/models/training.dart';
 
 class ForTimePage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
@@ -79,7 +80,8 @@ class ForTimePage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditForTimePage.show(context),
+        onPressed: () => EditTrainingPage.show(context,
+            title: 'por tiempo', type: 'for_time'),
         backgroundColor: Colors.black,
       ),
     );
@@ -123,8 +125,10 @@ class ForTimePage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => EditForTimePage.show(context,
-                                training: training),
+                            onPressed: () => EditTrainingPage.show(context,
+                                training: training,
+                                title: 'por tiempo',
+                                type: 'for_time'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -134,7 +138,7 @@ class ForTimePage extends StatelessWidget {
                         ),
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => DescribeForTimePage.show(context,
+                            onPressed: () => DescribeTrainings.show(context,
                                 training: training),
                             child: Icon(
                               Icons.description,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guia_entrenamiento/app/home/aerobic_activity/continuous_run/for_km/describe_for_km.dart';
-import 'package:guia_entrenamiento/app/home/aerobic_activity/continuous_run/for_km/edit_for_km.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/edit_training.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
@@ -10,6 +10,7 @@ import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.da
 import 'package:guia_entrenamiento/services/auth.dart';
 import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
+import 'package:guia_entrenamiento/app/home/models/training.dart';
 
 class ForKmPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
@@ -78,8 +79,8 @@ class ForKmPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditForKmPage.show(context),
-        backgroundColor: Colors.black,
+        onPressed: () =>
+            EditTrainingPage.show(context, title: 'por km', type: 'for_km'),
       ),
     );
   }
@@ -122,8 +123,10 @@ class ForKmPage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () =>
-                                EditForKmPage.show(context, training: training),
+                            onPressed: () => EditTrainingPage.show(context,
+                                training: training,
+                                title: 'por km',
+                                type: 'for_km'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -133,7 +136,7 @@ class ForKmPage extends StatelessWidget {
                         ),
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => DescribeForKmPage.show(context,
+                            onPressed: () => DescribeTrainings.show(context,
                                 training: training),
                             child: Icon(
                               Icons.description,

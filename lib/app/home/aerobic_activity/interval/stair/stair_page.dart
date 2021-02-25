@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guia_entrenamiento/app/home/aerobic_activity/interval/stair/describe_stair.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/edit_training.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
@@ -9,8 +10,6 @@ import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.da
 import 'package:guia_entrenamiento/services/auth.dart';
 import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
-
-import 'edit_stair.dart';
 
 class StairPage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
@@ -79,7 +78,8 @@ class StairPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditStairPage.show(context),
+        onPressed: () =>
+            EditTrainingPage.show(context, title: 'Escaleras', type: 'stair'),
       ),
     );
   }
@@ -122,8 +122,10 @@ class StairPage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () =>
-                                EditStairPage.show(context, training: training),
+                            onPressed: () => EditTrainingPage.show(context,
+                                training: training,
+                                title: 'Escaleras',
+                                type: 'stair'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -133,7 +135,7 @@ class StairPage extends StatelessWidget {
                         ),
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => DescribeStairPage.show(context,
+                            onPressed: () => DescribeTrainings.show(context,
                                 training: training),
                             child: Icon(
                               Icons.description,

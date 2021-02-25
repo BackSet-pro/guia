@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/final_user/final_page.dart';
 import 'package:guia_entrenamiento/app/home/models/brigade.dart';
 import 'package:guia_entrenamiento/app/home/models/session.dart';
 import 'package:guia_entrenamiento/app/home/sesion/edit_session_page.dart';
@@ -99,6 +100,7 @@ class SessionPage extends StatelessWidget {
             direction: DismissDirection.endToStart,
             onDismissed: (direction) => _delete(context, session),
             child: CommonListTile(
+              onTap: () => FinalPage.show(context, session: session),
               text: session.name,
               trailing: FlatButton(
                 child: Icon(Icons.edit),

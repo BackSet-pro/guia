@@ -1,6 +1,7 @@
 import 'package:guia_entrenamiento/app/home/models/brigade.dart';
 import 'package:guia_entrenamiento/app/home/models/session.dart';
 import 'package:guia_entrenamiento/app/home/models/session_has_training.dart';
+import 'package:guia_entrenamiento/common_widgets/describe_text.dart';
 import 'package:guia_entrenamiento/services/brigade_api.dart';
 import 'package:guia_entrenamiento/services/session_api.dart';
 import 'package:guia_entrenamiento/services/session_has_training_api.dart';
@@ -11,8 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DescribeWarmUpPage extends StatefulWidget {
-  const DescribeWarmUpPage({Key key, this.training, this.trainingApi})
+class DescribeTrainings extends StatefulWidget {
+  const DescribeTrainings({Key key, this.training, this.trainingApi})
       : super(key: key);
   final Training training;
   final TrainingApi trainingApi;
@@ -21,7 +22,7 @@ class DescribeWarmUpPage extends StatefulWidget {
     final trainingApi = context.read<TrainingApi>();
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DescribeWarmUpPage(
+        builder: (context) => DescribeTrainings(
           trainingApi: trainingApi,
           training: training,
         ),
@@ -31,11 +32,12 @@ class DescribeWarmUpPage extends StatefulWidget {
   }
 
   @override
-  _DescribeWarmUpPageState createState() => _DescribeWarmUpPageState();
+  _DescribeTrainingsState createState() => _DescribeTrainingsState();
 }
 
-class _DescribeWarmUpPageState extends State<DescribeWarmUpPage> {
+class _DescribeTrainingsState extends State<DescribeTrainings> {
   bool select = false;
+
   Brigade _selectedBrigade;
   Session _selectedSession;
 
@@ -93,28 +95,54 @@ class _DescribeWarmUpPageState extends State<DescribeWarmUpPage> {
         SizedBox(
           height: 10.00,
         ),
-        Text(
-          "Descripción:",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 17,
+        if (widget.training.description != null)
+          DescribeText(
+            title: 'Descripción',
+            text: widget.training.description,
+            unit: '',
           ),
-        ),
-        Text(widget.training.description),
-        SizedBox(
-          height: 5.00,
-        ),
-        Text(
-          "Tiempo:",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 17,
+        if (widget.training.time != null)
+          DescribeText(
+            title: 'Tiempo',
+            text: widget.training.time.toString(),
+            unit: ' minutos',
           ),
-        ),
-        Text(widget.training.time.toString()),
-        SizedBox(
-          height: 5.00,
-        ),
+        if (widget.training.distance != null)
+          DescribeText(
+            title: 'Distancia',
+            text: widget.training.distance.toString(),
+            unit: '',
+          ),
+        if (widget.training.intensity != null)
+          DescribeText(
+            title: 'Intensidad',
+            text: widget.training.intensity.toString(),
+            unit: ' %',
+          ),
+        if (widget.training.style != null)
+          DescribeText(
+            title: 'Estilo',
+            text: widget.training.style,
+            unit: '',
+          ),
+        if (widget.training.pausa != null)
+          DescribeText(
+            title: 'Pausa',
+            text: widget.training.pausa.toString(),
+            unit: ' minutos',
+          ),
+        if (widget.training.repetitions != null)
+          DescribeText(
+            title: 'Repeticiones',
+            text: widget.training.repetitions.toString(),
+            unit: '',
+          ),
+        if (widget.training.numberSeries != null)
+          DescribeText(
+            title: 'Número de series',
+            text: widget.training.numberSeries.toString(),
+            unit: '',
+          ),
         StreamBuilder<List<Brigade>>(
           key: UniqueKey(),
           stream: brigadeApi.brigadeStream(),

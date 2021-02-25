@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
+import 'package:guia_entrenamiento/app/home/edit_training.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
-import 'package:guia_entrenamiento/app/home/strength/principal/croossfit/describe_crossfit.dart';
-import 'package:guia_entrenamiento/app/home/strength/principal/croossfit/edit_crossfit.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
 import 'package:guia_entrenamiento/common_widgets/show_alert_dialog.dart';
@@ -78,7 +78,8 @@ class CrossfitPage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditCrossfitPage.show(context),
+        onPressed: () => EditTrainingPage.show(context,
+            title: 'crossfit', type: 'crossfit'),
       ),
     );
   }
@@ -121,8 +122,10 @@ class CrossfitPage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => EditCrossfitPage.show(context,
-                                training: training),
+                            onPressed: () => EditTrainingPage.show(context,
+                                training: training,
+                                title: 'crossfit',
+                                type: 'crossfit'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -132,7 +135,7 @@ class CrossfitPage extends StatelessWidget {
                         ),
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => DescribeCrossfitPage.show(context,
+                            onPressed: () => DescribeTrainings.show(context,
                                 training: training),
                             child: Icon(
                               Icons.description,

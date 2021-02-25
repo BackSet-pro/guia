@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guia_entrenamiento/app/home/anaerobic_activity/race/describe_race.dart';
-import 'package:guia_entrenamiento/app/home/anaerobic_activity/race/edit_race_page.dart';
+import 'package:guia_entrenamiento/app/home/describe_trainings.dart';
 import 'package:guia_entrenamiento/app/home/brigade/list_items_builder.dart';
+import 'package:guia_entrenamiento/app/home/edit_training.dart';
 import 'package:guia_entrenamiento/app/home/models/training.dart';
 import 'package:guia_entrenamiento/app/landing_page.dart';
 import 'package:guia_entrenamiento/common_widgets/common_draw.dart';
@@ -10,6 +10,7 @@ import 'package:guia_entrenamiento/common_widgets/show_exception_alert_dialog.da
 import 'package:guia_entrenamiento/services/auth.dart';
 import 'package:guia_entrenamiento/services/training_api.dart';
 import 'package:provider/provider.dart';
+import 'package:guia_entrenamiento/app/home/models/training.dart';
 
 class RacePage extends StatelessWidget {
   Future<void> _signOut(BuildContext context) async {
@@ -78,7 +79,8 @@ class RacePage extends StatelessWidget {
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => EditRacePage.show(context),
+        onPressed: () =>
+            EditTrainingPage.show(context, title: 'Caminata', type: 'race'),
       ),
     );
   }
@@ -121,8 +123,10 @@ class RacePage extends StatelessWidget {
                       children: [
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () =>
-                                EditRacePage.show(context, training: training),
+                            onPressed: () => EditTrainingPage.show(context,
+                                training: training,
+                                title: 'Caminata',
+                                type: 'race'),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -132,7 +136,7 @@ class RacePage extends StatelessWidget {
                         ),
                         FlatButton(
                             color: Colors.redAccent,
-                            onPressed: () => DescribeRacePage.show(context,
+                            onPressed: () => DescribeTrainings.show(context,
                                 training: training),
                             child: Icon(
                               Icons.description,
